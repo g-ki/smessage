@@ -1,0 +1,45 @@
+<div class="chat">
+
+  <div class="messages">
+    <% (1..5).each do %>
+    <div>
+      <div class="message">
+        <h5 class="author">
+          Author
+        </h5>
+
+        <div class="content-wrap clearfix">
+          <span class="content">Hello, this is message!</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="message">
+        <div class="content-wrap clearfix">
+          <span class="content right">Donec maximus nulla sed sodales maximus. Nulla a nunc vitae augue dignissim tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed auctor sem. Aliquam consequat egestas nisi, quis venenatis nunc semper vitae. Vestibulum vitae maximus magna, eget faucibus lectus. Nullam sit amet nibh euismod, iaculis urna eu, maximus urna.</span>
+        </div>
+
+      </div>
+    </div>
+
+    <% end %>
+  </div>
+
+  <div class="input-box">
+    <form action="chat/132141241251/" method="post">
+      <button type="button" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
+      <textarea name="message" placeholder="New sMessage"></textarea>
+      <button type="submit" class="pure-button pure-button-primary">Send</button>
+    </form>
+
+    <div class="message-settings">
+      <div>
+        <h2>Settings</h2>
+      </div>
+    </div>
+
+  </div>
+
+</div>

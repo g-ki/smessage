@@ -2,7 +2,7 @@ class App < Sinatra::Base
   get '/login' do
     redirect '/' if logged_in?
 
-    erb :login
+    erb :'website/login', layout: :"layouts/default"
   end
 
   post '/login' do
@@ -16,7 +16,7 @@ class App < Sinatra::Base
   get '/signup' do
     redirect '/' if logged_in?
 
-    erb :signup
+    erb :'website/signup', layout: :"layouts/default"
   end
 
   post '/signup' do

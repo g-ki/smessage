@@ -19,7 +19,13 @@ class App < Sinatra::Base
   end
 
   get '/' do
-  
+    if not logged_in?
+      erb :'website/home', layout: :"layouts/default"
+    else
+      @user = current_user
+      @header = @user.username
+      erb :'messenger/chat', layout: :"layouts/messenger"
+    end
   end
 
 end

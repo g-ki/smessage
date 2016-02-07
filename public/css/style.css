@@ -1,0 +1,73 @@
+.clearfix:after {
+  content:"";
+  display:block;
+  clear:both;
+}
+
+.pure-button-primary {
+  background-color: #E74C3C;
+}
+
+header {
+  height: 53px;
+  background-color: #E74C3C;
+  width: 100%;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+header .logout {
+  position: absolute;
+  text-decoration: none;
+  color: #fff;
+  top: 25%;
+  left: 10px;
+  font-size: 1.3em;
+  transition: color 0.1s;
+}
+
+header .logout:hover {
+  color: #2C3E50;
+}
+
+
+header .logo {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+header .logo a {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Gloria Hallelujah', cursive;
+  transition: color 0.3s;
+}
+
+header .logo a:hover {
+  color: #2C3E50
+}
+
+.front_or {
+  text-align: center;
+  color: #2C3E50;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 3em;
+}
+
+.form-wrap {
+  padding: 30px 80px;
+}
+
+.form-wrap input {
+  margin-bottom: 0.5em;
+}
+
+.form-wrap legend {
+  font-size: 1.5em;
+}
+
+.green-button {
+  background-color: #1ABC9C;
+}

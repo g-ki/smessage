@@ -1,0 +1,143 @@
+html {
+  background-color: #2C3E50;
+  color: #ECF0F1;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  border-right: 1px dashed #515F6F;
+}
+
+header {
+  margin: 0;
+  border-right: 1px dashed #E74C3C;
+  transition: background-color 0.3s;
+}
+
+header .logo {
+  font-size: 1.4em;
+}
+
+hr {
+  border: 1px dashed #515F6F;
+  border-bottom: none;
+}
+
+.pure-menu-link {
+  color: #ECF0F1;
+}
+
+.pure-menu-active>.pure-menu-link, .pure-menu-link:hover, .pure-menu-link:focus {
+  background-color: #1ABC9C;
+}
+
+.custom-restricted {
+    height: 100%;
+}
+
+.main {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main .main-head {
+  text-align: center;
+  font-weight: normal;
+  border-bottom: 1px dashed #515F6F;
+  height: 53px;
+}
+
+.main .chat {
+  flex: 1;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat .messages {
+  flex: 1;
+  overflow: auto;
+}
+
+.chat .messages .message {
+
+}
+
+.chat .messages .message .author {
+  color: #74808C;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.1;
+  margin-bottom: 1px;
+  padding-left: 12px;
+}
+
+.chat .messages .message .content-wrap {
+  margin-left: 35px;
+  font-size: 14px;
+}
+
+.chat .messages .message .content {
+  background-color: #ECF0F1;
+  color: rgba(0, 0, 0, 1);
+  margin: 1px 0;
+  padding: 6px 12px;
+  border-radius: 1em;
+  float: left;
+  max-width: 55%;
+  line-height: 1.4;
+}
+
+.chat .messages .message .content.right {
+  float: right;
+  margin-right: 35px;
+  background-color: #16A085;
+  color: #ECF0F1;
+  font-weight: 200;
+}
+
+.chat .input-box .pure-button-primary {
+  background-color: #16A085;
+  border-radius: 0;
+}
+
+.chat .input-box {
+  width: 100%;
+}
+
+.chat .input-box form {
+  display: flex;
+  flex-direction: row;
+}
+
+.chat .input-box textarea {
+  flex: 1;
+  min-height: 40px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  resize: none;
+  overflow: auto;
+  background: #515F6F;
+  color: #ECF0F1;
+}
+
+.chat .input-box .message-settings {
+  height: 0;
+  transition: height 0.3s;
+  overflow: hidden;
+}
+
+.chat .input-box .message-settings > div {
+  padding: 10px 35px;
+}
+
+.chat .input-box:hover .message-settings {
+  height: 100px;
+}
