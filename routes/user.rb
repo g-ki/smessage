@@ -1,4 +1,5 @@
 class App < Sinatra::Base
+
   get '/login' do
     redirect '/' if logged_in?
 
@@ -34,4 +35,32 @@ class App < Sinatra::Base
       redirect '/signup'
     end
   end
+
+  get '/connect' do
+    @user = current_user
+    @header = "Connections"
+    query = {:id.not => @user.id ,:friendships => [:target => @user]}
+    @requests = User.all(query) - @user.friends
+    erb :'messenger/search', layout: :"layouts/messenger"
+  end
+
+  get '/connect/:id' do
+    if user = User.get(params[:id])
+      current_user.send_request user
+    end
+
+    redirect '/connect'
+  end
+
+  post '/connect/find' do
+    @user = current_user
+    @header = "Connections"
+    query = { :fields => [:id, :username],
+              :id.not => @user.id,
+              :username.like => "%#{params[:search]}%",
+            }
+            
+    User.all(query).to_json only: [:id, :username]
+  end
+
 end
