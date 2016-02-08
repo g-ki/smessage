@@ -37,6 +37,8 @@ class App < Sinatra::Base
   end
 
   get '/connect' do
+    restricred_area
+
     @user = current_user
     @header = "Connections"
     query = {:id.not => @user.id ,:friendships => [:target => @user]}
@@ -45,6 +47,8 @@ class App < Sinatra::Base
   end
 
   get '/connect/:id' do
+    restricred_area
+
     if user = User.get(params[:id])
       current_user.send_request user
     end
@@ -53,13 +57,15 @@ class App < Sinatra::Base
   end
 
   post '/connect/find' do
+    restricred_area
+
     @user = current_user
     @header = "Connections"
     query = { :fields => [:id, :username],
               :id.not => @user.id,
               :username.like => "%#{params[:search]}%",
             }
-            
+
     User.all(query).to_json only: [:id, :username]
   end
 
