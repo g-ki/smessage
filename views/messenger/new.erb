@@ -1,0 +1,19 @@
+<div class="search pure-g pure-u-1">
+
+  <form class="pure-form pure-g" action="/chat/new" method="post">
+    <div class="pure-u-1-3">
+      <% @user.friends.each do |friend| %>
+      <label class="pure-checkbox">
+        <input type="checkbox" name="friends[]" value="<%= friend.id %>">
+        <%= friend.username %>
+      </label>
+      <% end %>
+    </div>
+
+    <div class="pure-u-1-3">
+      <button type="submit" class="pure-input-1 pure-button">Create</button>
+    </div>
+
+  </form>
+
+</div>

@@ -22,9 +22,7 @@ class App < Sinatra::Base
     if not logged_in?
       erb :'website/home', layout: :"layouts/default"
     else
-      @user = current_user
-      @header = @user.username
-      erb :'messenger/chat', layout: :"layouts/messenger"
+      redirect '/chat'
     end
   end
 

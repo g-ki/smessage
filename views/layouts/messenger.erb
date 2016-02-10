@@ -26,12 +26,14 @@
         <div class="pure-menu pure-menu-scrollable custom-restricted">
             <a href="#" class="pure-menu-link pure-menu-heading"><%= @user.username %></a>
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">New Message</a></li>
-                <li class="pure-menu-item"><a href="connect" class="pure-menu-link">Connections</a></li>
+                <li class="pure-menu-item"><a href="/chat/new" class="pure-menu-link">New Message</a></li>
+                <li class="pure-menu-item"><a href="/connect" class="pure-menu-link">Connections</a></li>
                 <hr>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">obama1</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">putin</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">ali_fasul</a></li>
+                <% @user.chats.all(:order => [:updated_at.desc]).each do |chat| %>
+                <li class="pure-menu-item">
+                  <a href="/chat/<%= chat.id %>" class="pure-menu-link"><%= chat.name(@user) %></a>
+                </li>
+                <% end %>
             </ul>
         </div>
       </div>

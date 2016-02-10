@@ -1,24 +1,17 @@
 <div class="chat">
 
   <div class="messages">
-    <% (1..5).each do %>
+    <% @chat.messages.each do |message| %>
     <div>
       <div class="message">
         <h5 class="author">
-          Author
+          <%= message.user.username if message.user != @user %>
         </h5>
 
         <div class="content-wrap clearfix">
-          <span class="content">Hello, this is message!</span>
-        </div>
-
-      </div>
-    </div>
-
-    <div>
-      <div class="message">
-        <div class="content-wrap clearfix">
-          <span class="content right">Donec maximus nulla sed sodales maximus. Nulla a nunc vitae augue dignissim tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed auctor sem. Aliquam consequat egestas nisi, quis venenatis nunc semper vitae. Vestibulum vitae maximus magna, eget faucibus lectus. Nullam sit amet nibh euismod, iaculis urna eu, maximus urna.</span>
+          <span class="content<%= ' right' if message.user == @user %>">
+            <%= message.content %>
+          </span>
         </div>
 
       </div>
@@ -28,7 +21,7 @@
   </div>
 
   <div class="input-box">
-    <form action="chat/132141241251/" method="post">
+    <form action="/chat/<%= @chat.id %>/message" method="post">
       <button type="button" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
       <textarea name="message" placeholder="New sMessage"></textarea>
       <button type="submit" class="pure-button pure-button-primary">Send</button>

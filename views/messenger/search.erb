@@ -5,7 +5,7 @@
     <ul class="pure-menu-list">
       <% @user.friends.each do |user| %>
       <li class="pure-menu-item">
-        <a href="/chat/" class="pure-menu-link">
+        <a href="/chat/<%= user.username %>" class="pure-menu-link">
           <i class="fa fa-user-secret"></i> <%= user.username %>
         </a>
       </li>
@@ -43,7 +43,7 @@
 
     <h3>Results:</h3>
     <ul class="pure-menu-list">
-      
+
     </ul>
   </div>
 
