@@ -6,9 +6,11 @@ class User
   property :username, String, :required => true, :unique => true
   property :password, BCryptHash, :required => true
 
-  has n, :friendships, :child_key => [:source_id]
-  has n, :friends, self, :through => :friendships, :via => :target
+  has n, :connections, :child_key => [:source_id]
+  has n, :contacts, self, :through => :connections, :via => :target
 
+  has n, :chats, :through => Resource
+  has n, :messages
 
   def self.authenticate(username, password)
     user = User.first username: username
@@ -21,22 +23,26 @@ class User
   end
 
   def conntected?(other)
-    friends.get other.id
+    not contacts.get(other.id).nil?
   end
 
   def friend?(other)
     conntected?(other) and other.conntected?(self)
   end
 
+  def friends
+    contacts & User.all(:connections => [:target => self])
+  end
+
   def send_request(other)
-    friends << other unless conntected? other
+    contacts << other unless conntected? other
     save
     self
   end
 
 end
 
-class Friendship
+class Connection
   include DataMapper::Resource
 
   belongs_to :source, 'User', :key => true

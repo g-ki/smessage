@@ -41,8 +41,8 @@ class App < Sinatra::Base
 
     @user = current_user
     @header = "Connections"
-    query = {:id.not => @user.id ,:friendships => [:target => @user]}
-    @requests = User.all(query) - @user.friends
+    query = {:id.not => @user.id ,:connections => [:target => @user]}
+    @requests = User.all(query) - @user.contacts
     erb :'messenger/search', layout: :"layouts/messenger"
   end
 
