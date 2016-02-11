@@ -46,16 +46,6 @@ class App < Sinatra::Base
     erb :'messenger/search', layout: :"layouts/messenger"
   end
 
-  get '/connect/:id' do
-    restricred_area
-
-    if user = User.get(params[:id])
-      current_user.send_request user
-    end
-
-    redirect '/connect'
-  end
-
   post '/connect/find' do
     restricred_area
 
@@ -69,4 +59,13 @@ class App < Sinatra::Base
     User.all(query).to_json only: [:id, :username]
   end
 
+  post '/connect' do
+    restricred_area
+
+    if user = User.get(params[:id])
+      current_user.send_request user
+    end
+
+    redirect '/connect'
+  end
 end

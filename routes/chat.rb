@@ -2,10 +2,12 @@ class App < Sinatra::Base
 
   before '/chat' do
     restricred_area
+    @user = current_user
   end
 
   before '/chat/*' do
     restricred_area
+    @user = current_user
   end
 
   get '/chat' do
@@ -49,13 +51,10 @@ class App < Sinatra::Base
     erb :'messenger/chat', layout: :"layouts/messenger"
   end
 
-  put '/chat/:id' do
-
-  end
-
-  get '/chat/:id/delete' do
-    @user = current_user
-    p @user.chats.get(params[:id]).destroy
+  delete '/chat/:id' do
+    chat = @user.chats.get(params[:id])
+    chat.destroy if chat
+    redirect '/chat'
   end
 
   post '/chat/:id/message' do
