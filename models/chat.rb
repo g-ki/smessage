@@ -7,8 +7,8 @@ class Chat
   property :updated_at, DateTime
 
 
-  has n, :users, :through => Resource
-  has n, :messages
+  has n, :users, :through => Resource, :constraint => :skip
+  has n, :messages, :constraint => :destroy
 
 
   def name(current_user = nil)

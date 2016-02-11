@@ -6,11 +6,11 @@ class User
   property :username, String, :required => true, :unique => true
   property :password, BCryptHash, :required => true
 
-  has n, :connections, :child_key => [:source_id]
-  has n, :contacts, self, :through => :connections, :via => :target
+  has n, :connections, :child_key => [:source_id], :constraint => :destroy
+  has n, :contacts, self, :through => :connections, :via => :target, :constraint => :skip
 
-  has n, :chats, :through => Resource
-  has n, :messages
+  has n, :chats, :through => Resource, :constraint => :skip
+  has n, :messages, :constraint => :destroy
 
   def self.authenticate(username, password)
     user = User.first username: username
