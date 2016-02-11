@@ -72,5 +72,5 @@ class App < Sinatra::Base
 
     redirect "/chat/#{params[:id]}"
   end
-  
+
 end
