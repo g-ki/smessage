@@ -7,13 +7,6 @@ describe "User model" do
     @user = User.create fake_user
   end
 
-  def make_friend
-    contact = User.create rand_user
-    @user.send_request contact
-    contact.send_request @user
-    contact
-  end
-
   it "should authenticate" do
     user = User.authenticate(@user.username, fake_user[:password])
 

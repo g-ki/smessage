@@ -27,4 +27,11 @@ RSpec.configure do |config|
       :password => 'password',
     }
   end
+
+  def make_friend
+    contact = User.create rand_user
+    @user.send_request contact
+    contact.send_request @user
+    contact
+  end
 end

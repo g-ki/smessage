@@ -52,4 +52,23 @@ describe "Chat model" do
     expect(@user.messages.all.count).to be 0
   end
 
+  describe "group chat" do
+
+    it "is group with more then 2 members" do
+      chat = Chat.create
+      chat.users << @user << User.create(rand_user) << User.create(rand_user)
+      chat.update
+
+      expect(chat.group?).to be true
+    end
+
+    it "is not group with less then 3 members" do
+      chat = Chat.create
+      chat.users << @user << User.create(rand_user)
+      chat.update
+
+      expect(chat.group?).to be false
+    end
+  end
+
 end
