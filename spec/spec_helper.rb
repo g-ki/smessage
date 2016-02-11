@@ -13,10 +13,18 @@ end
 RSpec.configure do |config|
   config.include RSpecMixin
 
-  DataMapper::setup(:default, 'sqlite::memory:')
+  #DataMapper::setup(:default, 'sqlite::memory:')
+  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/test.db")
   DataMapper.finalize.auto_upgrade!
 
   def fake_user
-    {:username => 'foobar', :password => 'pass'}
+    {:username => 'fake_user', :password => 'fake_pass'}
+  end
+
+  def rand_user
+    {
+      :username => 'qwertyuiopasdfghjklzxcvbnm'.each_char.to_a.shuffle.join(""),
+      :password => 'password',
+    }
   end
 end
