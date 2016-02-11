@@ -6,10 +6,12 @@ end
 
 task :default => ['specs']
 
-task :watch_all do
-  system 'bundle exec observr obser_all.rb'
-end
+namespace :watch do
+  task :all do
+    system 'bundle exec observr obser_all.rb'
+  end
 
-task :watch_each do
-  system 'bundle exec observr obser_each.rb'
+  task :each do
+    system 'bundle exec observr obser_each.rb'
+  end
 end
