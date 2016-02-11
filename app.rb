@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'sinatra'
+require 'tilt/erb'
 require 'data_mapper'
 require 'rack-flash'
 
