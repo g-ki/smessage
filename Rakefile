@@ -8,10 +8,10 @@ task :default => ['specs']
 
 namespace :watch do
   task :all do
-    system 'bundle exec observr obser_all.rb'
+    system 'bundle exec observr observr_all.rb'
   end
 
   task :each do
-    system 'bundle exec observr obser_each.rb'
+    system 'bundle exec observr observr_each.rb'
   end
 end
