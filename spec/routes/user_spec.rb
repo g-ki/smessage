@@ -16,24 +16,14 @@ describe "User" do
       expect(last_response.body).to include "<legend>Sign Up</legend>"
     end
 
-    it "shoude be allowed to Login '/login' and  Signup '/Signup'" do
+    it "should be allowed to Login '/login' and  Signup '/Signup'" do
       get '/login'
       expect(last_response.body).to include "<legend>Sign In</legend>"
 
       get '/signup'
       expect(last_response.body).to include "<legend>Sign Up</legend>"
     end
-
-    it "shoude be restricted from chat '/chat/*'" do
-      get '/chat'
-      expect(last_response.redirection?).to be true
-      expect(last_response.location).to eq("http://example.org/login")
-
-      get '/chat/*'
-      expect(last_response.redirection?).to be true
-      expect(last_response.location).to eq("http://example.org/login")
-    end
-
+    
   end
 
   context "when registers" do

@@ -5,7 +5,7 @@ describe "User connections" do
 
     before(:all) { get '/logout' }
 
-    it "shoude be restricted from connect '/connect/*'" do
+    it "should be restricted from connect '/connect/*'" do
       get '/connect'
       expect(last_response.redirection?).to be true
       expect(last_response.location).to eq("http://example.org/login")
@@ -15,7 +15,7 @@ describe "User connections" do
 
   context "when logged in" do
 
-    before(:all) do
+    before(:each) do
       User.all.each { |user| user.destroy }
       @user = User.create fake_user
       fake_friend = fake_user.update({:username => "friend"})
@@ -26,6 +26,13 @@ describe "User connections" do
     it "should see all friends" do
       get '/connect'
       @user.friends.each do |friend|
+        expect(last_response.body).to include friend.username
+      end
+    end
+
+    it "should see all requests" do
+      get '/connect'
+      User.all(:contacts => [@user]).each do |friend|
         expect(last_response.body).to include friend.username
       end
     end
