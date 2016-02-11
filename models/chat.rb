@@ -16,4 +16,13 @@ class Chat
     (users - current_user).map(&:username).join(", ")
   end
 
+  def group?
+    users.size > 2
+  end
+
+  def destroy
+    ChatUser.all(:chat_id => id).destroy
+    super
+  end
+
 end

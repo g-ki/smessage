@@ -12,6 +12,11 @@ class User
   has n, :chats, :through => Resource, :constraint => :skip
   has n, :messages, :constraint => :destroy
 
+  def destroy
+    ChatUser.all(:user_id => id).destroy
+    super
+  end
+
   def self.authenticate(username, password)
     user = User.first username: username
 
