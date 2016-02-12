@@ -5,6 +5,7 @@ GEM
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    daemons (1.2.3)
     data_objects (0.10.17)
       addressable (~> 2.1)
     datamapper (1.2.0)
@@ -54,7 +55,11 @@ GEM
       dm-core (~> 1.2.0)
     do_sqlite3 (0.10.17)
       data_objects (= 0.10.17)
+    eventmachine (1.0.9.1)
     fastercsv (1.5.5)
+    faye-websocket (0.10.2)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.9.10)
     ffi-aspell (1.1.0)
       ffi
@@ -91,9 +96,16 @@ GEM
       ffi-aspell
       trollop (>= 1.16.2)
     stringex (1.5.1)
+    thin (1.6.4)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (~> 1.0)
     tilt (2.0.2)
     trollop (2.1.2)
     uuidtools (2.1.5)
+    websocket-driver (0.6.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
 
 PLATFORMS
   ruby
@@ -101,6 +113,7 @@ PLATFORMS
 DEPENDENCIES
   datamapper
   dm-sqlite-adapter
+  faye-websocket
   observr
   rack-flash3
   rack-test
@@ -108,6 +121,7 @@ DEPENDENCIES
   rspec
   sinatra
   skeptic
+  thin
 
 BUNDLED WITH
    1.11.2

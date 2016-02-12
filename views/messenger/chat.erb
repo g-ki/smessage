@@ -1,6 +1,6 @@
 <div class="chat">
 
-  <div class="messages">
+  <div id="message-log" class="messages">
     <% @chat.messages.each do |message| %>
     <div>
       <div class="message">
@@ -11,6 +11,7 @@
         <div class="content-wrap clearfix">
           <span class="content<%= ' right' if message.user == @user %>">
             <%= message.content %>
+            <% #view_message(@user, message) %>
           </span>
         </div>
 
@@ -21,9 +22,9 @@
   </div>
 
   <div class="input-box">
-    <form action="/chat/<%= @chat.id %>/message" method="post">
+    <form id="new-message" action="/chat/<%= @chat.id %>/message" method="post">
       <button type="button" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
-      <textarea name="message" placeholder="New sMessage"></textarea>
+      <textarea id="input-message"name="message" placeholder="New sMessage"></textarea>
       <button type="submit" class="pure-button pure-button-primary">Send</button>
     </form>
 
@@ -34,5 +35,6 @@
     </div>
 
   </div>
-
+  <script src="/js/socket-chat.js"></script>
+  <script src="/js/chat.js"></script>
 </div>

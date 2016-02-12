@@ -63,6 +63,7 @@ hr {
 .chat .messages {
   flex: 1;
   overflow: auto;
+  padding-bottom: 25px;
 }
 
 .chat .messages .message {
@@ -139,7 +140,7 @@ hr {
 }
 
 .chat .input-box:hover .message-settings {
-  height: 100px;
+  /*height: 100px;*/
 }
 
 .search .results {

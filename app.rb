@@ -3,6 +3,8 @@ require 'sinatra'
 require 'tilt/erb'
 require 'data_mapper'
 require 'rack-flash'
+require 'thin'
+require 'faye/websocket'
 
 
 require_relative 'models/init'
@@ -26,5 +28,4 @@ class App < Sinatra::Base
       redirect '/chat'
     end
   end
-
 end

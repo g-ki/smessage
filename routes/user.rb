@@ -53,13 +53,13 @@ class App < Sinatra::Base
     @header = "Connections"
     query = { :fields => [:id, :username],
               :id.not => @user.id,
-              :username.like => "%#{params[:search]}%",
+              :username.like => "#{params[:search]}%",
             }
 
     User.all(query).to_json only: [:id, :username]
   end
 
-  post '/connect' do
+  get '/connect/:id' do
     restricred_area
 
     if user = User.get(params[:id])
