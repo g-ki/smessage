@@ -1,7 +1,7 @@
 <div class="chat">
 
   <div id="message-log" class="messages">
-    <% @chat.messages.each do |message| %>
+    <% @chat.messages.all_valid.each do |message| %>
     <div>
       <div class="message">
         <h5 class="author">
@@ -10,7 +10,13 @@
 
         <div class="content-wrap clearfix">
           <span class="content<%= ' right' if message.user == @user %>">
-            <%= message.content %>
+            <% if message.type == 'image' %>
+            <a href="/img/<%= message.content %>">
+              <img src="/img/<%= message.content %>" alt="<%= message.user %>" />
+            </a>
+            <% else %>
+              <%= message.content %>
+            <% end %>
             <% view_message(@user, message) %>
           </span>
         </div>
@@ -22,15 +28,29 @@
   </div>
 
   <div class="input-box">
-    <form id="new-message" action="/chat/<%= @chat.id %>/message" method="post">
-      <button type="button" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
-      <textarea id="input-message"name="message" placeholder="New sMessage"></textarea>
-      <button type="submit" class="pure-button pure-button-primary">Send</button>
-    </form>
+    <div class="form-wrap">
+      <form id="new-message" action="/chat/<%= @chat.id %>/message" method="post">
+        <button id="settings-show" type="button" class="pure-button pure-button-primary"><i class="fa fa-cog"></i></button>
+        <textarea id="input-message"name="message" placeholder="New sMessage"></textarea>
+        <input type="hidden" name="expire_after">
+        <button type="submit" class="pure-button pure-button-primary">Send</button>
+
+      </form>
+      <button type="button" class="pure-button pure-button-primary upload">
+        <i class="fa fa-cloud-upload"></i>
+        <form action="/chat/<%= @chat.id %>/upload" class="dropzone"></form>
+      </button>
+    </div>
 
     <div class="message-settings">
       <div>
-        <h2>Settings</h2>
+        <h4 style="display: inline-block;">Expire after: </h4>
+        <select id="expire">
+          <option value="">Seen</option>
+          <% (15..120).step(15) do |i| %>
+          <option value="<%= i %>"><%= i %> mins</option>
+          <% end %>
+        </select>
       </div>
     </div>
 

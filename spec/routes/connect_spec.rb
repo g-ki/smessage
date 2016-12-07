@@ -38,7 +38,7 @@ describe "User connections" do
     end
 
     it "should be able to connect" do
-      post "/connect", {:id => @friend.id}
+      get "/connect/{#{@friend.id}}"
       @user.reload
 
       expect(@user.contacts).to include @friend

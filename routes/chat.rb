@@ -1,3 +1,5 @@
+require 'digest'
+
 class App < Sinatra::Base
 
   before '/chat' do
@@ -70,6 +72,28 @@ class App < Sinatra::Base
     @chat.update(:updated_at => DateTime.now )
 
     redirect "/chat/#{params[:id]}"
+  end
+
+  post "/chat/:id/upload" do
+    @user = current_user
+    @chat = @user.chats.get params[:id]
+
+    redirect "/chat" if @chat.nil?
+
+    filename = Digest::MD5.hexdigest (@user.id.to_s + params['file'][:filename])
+    filetype = File.extname(params['file'][:filename])
+    filename += filetype
+    File.open("./public/img/#{filename}", 'wb') do |f|
+      f.write(params[:file][:tempfile].read)
+    end
+
+    message = Message.new(:content => filename, :type => 'image')
+    message.user = @user
+    message.chat = @chat
+    message.save
+    @chat.update(:updated_at => DateTime.now )
+
+    "Uploaded."
   end
 
 end

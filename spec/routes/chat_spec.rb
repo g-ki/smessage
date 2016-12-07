@@ -21,8 +21,8 @@ describe "Chat" do
       Chat.all.destroy
 
       @user = User.create fake_user
-      @friendA = make_friend
-      @friendB = make_friend
+      @friend_A = make_friend
+      @friend_B = make_friend
 
       get "/logout"
       post "/login", fake_user
@@ -51,11 +51,11 @@ describe "Chat" do
       context "direct chat (2 users)" do
 
         it "should be created new" do
-          post '/chat/new', {friends:[@friendA.id]}
+          post '/chat/new', {friends:[@friend_A.id]}
 
           chat = @user.chats.last
           chat.users.each do |user|
-            expect([@user, @friendA]).to include(user)
+            expect([@user, @friend_A]).to include(user)
           end
         end
 
@@ -63,14 +63,14 @@ describe "Chat" do
 
       context "group chat (more then 2 users)" do
         it "make group chat" do
-          post '/chat/new', {friends: [@friendA.id, @friendB.id]}
+          post '/chat/new', {friends: [@friend_A.id, @friend_B.id]}
 
           chat_id =  last_response.location.split('/').last.to_i
           chat = @user.chats.get(chat_id)
 
           expect(chat).to be
           chat.users.each do |user|
-            expect([@user, @friendA, @friendB]).to include(user)
+            expect([@user, @friend_A, @friend_B]).to include(user)
           end
           expect(chat.group?).to be true
         end
@@ -79,7 +79,7 @@ describe "Chat" do
 
     describe "/chat/delete" do
       it "remove" do
-        post '/chat/new', {friends: [@friendA.id, @friendB.id]}
+        post '/chat/new', {friends: [@friend_A.id, @friend_B.id]}
         chat_id = last_response.location.split('/').last.to_i
 
         delete "/chat/#{chat_id}"
@@ -92,7 +92,7 @@ describe "Chat" do
     describe "messages" do
 
       it "are send and listed" do
-        post '/chat/new', {friends: [@friendA.id, @friendB.id]}
+        post '/chat/new', {friends: [@friend_A.id, @friend_B.id]}
         chat_id = last_response.location.split('/').last.to_i
         chat = @user.chats.get(chat_id)
 

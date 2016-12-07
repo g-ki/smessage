@@ -93,6 +93,7 @@ hr {
   float: left;
   max-width: 55%;
   line-height: 1.4;
+  word-wrap: break-word;
 }
 
 .chat .messages .message .content.right {
@@ -101,6 +102,10 @@ hr {
   background-color: #16A085;
   color: #ECF0F1;
   font-weight: 200;
+}
+
+.chat .messages .message .content img{
+  max-width: 100%;
 }
 
 .chat .input-box .pure-button-primary {
@@ -112,7 +117,27 @@ hr {
   width: 100%;
 }
 
+.chat .input-box .form-wrap {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+.chat .input-box button.upload {
+  position: relative;
+  overflow: hidden;
+}
+
+.chat .input-box button.upload form {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .chat .input-box form {
+  flex: 1;
   display: flex;
   flex-direction: row;
 }
@@ -139,8 +164,8 @@ hr {
   padding: 10px 35px;
 }
 
-.chat .input-box:hover .message-settings {
-  /*height: 100px;*/
+.chat .input-box .message-settings.active {
+  height: 100px;
 }
 
 .search .results {

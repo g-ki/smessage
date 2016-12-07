@@ -17,6 +17,12 @@ class App < Sinatra::Base
 
   use Rack::Flash
 
+  before do
+    # clean up database
+    to_destroy = Message.all - Message.all_valid
+    to_destroy.destroy
+  end
+
   configure do
     set :app_file, __FILE__
   end

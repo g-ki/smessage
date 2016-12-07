@@ -31,11 +31,20 @@ $(function() {
 
   $('#input-message').keypress(function(event){
     if (event.keyCode == '13') {
-      var message = {message: $(this).val(), type: 'message' }
-      chat.send(JSON.stringify(message))
+      var message = {content: $(this).val(), expire: $('#expire').val()}
+      var to_send = {message: message,  type: 'message' }
+      chat.send(JSON.stringify(to_send))
       $(this).val('')
       return false;
     }
+  })
+
+  $('#expire').change(function(event) {
+    $('#new-message').find('input[name="expire_after"]').val($(this).val())
+  })
+
+  $('#settings-show').click(function(event){
+    $('.message-settings').toggleClass('active')
   })
 
 });

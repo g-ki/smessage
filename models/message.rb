@@ -9,10 +9,10 @@ class Message
   end
 
   property :id, Serial
-
   property :content, Text, :required => true
-
   property :expire_at, DateTime
+  property :type, String
+
 
   belongs_to :user
   belongs_to :chat
@@ -24,4 +24,10 @@ class Message
   def self.all_valid
     all(:expire_at.gt => DateTime.now) | all(:expire_at => nil)
   end
+
+  def destroy
+    #File.delete("./public/img/#{content}") if type == 'image'
+    super
+  end
+
 end

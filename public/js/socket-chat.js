@@ -5,6 +5,8 @@ var SocketChat = function(url, post_message){
   self.onmessage = function(event) {
     var msg = JSON.parse(event.data)
     post_message(msg)
+    var evt = new CustomEvent('newChatMessage', { message: msg })
+    window.dispatchEvent(evt);
   }
 
   self.onopen = function() {
@@ -20,7 +22,7 @@ var SocketChat = function(url, post_message){
   self.connect = function() {
     console.log("WebSocket CONNECTING", url)
     self.server = new WebSocket(url);
-    self.server.onclose = self.onopen
+    self.server.onopen = self.onopen
     self.server.onclose = self.onclose
     self.server.onmessage = self.onmessage
   }

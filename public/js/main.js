@@ -1,4 +1,5 @@
 "use strict";
+
 $(function() {
     function search_users(form, callback) {
         var form_data = form.serialize();
@@ -27,4 +28,19 @@ $(function() {
         })
         return false;
     })
+
+    var notify = new Notifications();
+
+    window.addEventListener('newNotification', function (e) {
+      var notification = e.detail
+
+      switch (notification.type) {
+        case "chat-message":
+          console.log("You have new Message")
+          break;
+        default:
+
+      }
+
+    });
 })
